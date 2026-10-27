@@ -1,0 +1,14 @@
+{
+  "command": "python3 -u app.py",
+  "env_variables": {
+    "QUICKML_ENDPOINT_URL": "",
+    "QUICKML_ENDPOINT_KEY": "",
+    "CATALYST_ORG": "",
+    "QUICKML_PAYLOAD_MODE": "single",
+    "ZOHO_ACCOUNTS_URL": "https://accounts.zoho.com",
+    "ZOHO_CLIENT_ID": "",
+    "ZOHO_CLIENT_SECRET": "",
+    "ZOHO_REFRESH_TOKEN": ""
+  },
+  "memory": 512
+}

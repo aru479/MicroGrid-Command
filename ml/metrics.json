@@ -1,0 +1,12 @@
+{
+  "validation": "chronological hold-out (last 20% of train_telemetry.csv)",
+  "train_rows": 3200,
+  "holdout_rows": 800,
+  "holdout_temp_mean_c": 29.07,
+  "train_temp_mean_c": 15.85,
+  "rmse_hour_mean_baseline": 48.756,
+  "rmse_ridge_alpha_0.1": 8.489,
+  "rmse_ridge_alpha_1.0": 8.434,
+  "rmse_ridge_alpha_10.0": 8.602,
+  "rmse_gradient_boosting": 11.96
+}

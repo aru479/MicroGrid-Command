@@ -1,0 +1,3 @@
+# Only needed for ml/train_local.py (not deployed to AppSail)
+-r requirements.txt
+scikit-learn>=1.4

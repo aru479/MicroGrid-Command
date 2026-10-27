@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroGrid Command — Demand Forecast &amp; Dispatch</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>⚡ MicroGrid Command<span>24-hour demand forecast &amp; source dispatch</span></h1>
+  <span id="srcBadge" class="badge b-warn" title="">No forecast yet</span>
+</header>
+<main>
+  <div id="banner" class="banner" role="alert" aria-live="polite"></div>
+  <div id="warnings" class="notes" hidden></div>
+
+  <section class="card top">
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Active grid state (first forecast hour)</div>
+        <div id="activeState" class="state">—</div>
+        <div id="activeSub" class="muted">Load the sample day or upload a CSV, then run a forecast.</div>
+      </div>
+      <div class="socbox">
+        <div class="eyebrow">Battery charge at end of window</div>
+        <div id="socNow" class="socval">—</div>
+        <div class="soc"><i id="socBar"></i></div>
+      </div>
+      <div class="tools">
+        <button id="btnSample">Load sample day</button>
+        <label class="btn" for="file">Upload CSV</label>
+        <input id="file" type="file" accept=".csv,text/csv" hidden>
+        <label class="muted">Start charge % <input id="soc" type="number" min="10" max="100" value="90" class="mini"></label>
+        <button id="btnRun" class="primary">Run forecast</button>
+        <button id="btnDownload" disabled>Download predictions</button>
+      </div>
+    </div>
+    <div id="loading" class="loading" hidden><span class="spin"></span> Forecasting…</div>
+  </section>
+
+  <section id="kpis" class="grid kpis"></section>
+
+  <section class="grid row2">
+    <div class="card"><h2>Predicted load (kW)</h2><div class="chartbox"><canvas id="loadChart"></canvas></div></div>
+    <div class="card"><h2>Battery state of charge (%)</h2><div class="chartbox"><canvas id="socChart"></canvas></div></div>
+  </section>
+
+  <section class="grid row2 gap-top">
+    <div class="card"><h2>Forecast &amp; dispatch table</h2>
+      <div class="tablewrap"><table id="dispatch"><thead><tr><th>Time</th><th>Demand kW</th><th>Mode</th><th>Alert</th><th>Battery kW</th><th>Grid kW</th><th>SoC %</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="card"><h2>System / activity log</h2><div id="log" class="log"><span class="muted">No events yet.</span></div></div>
+  </section>
+
+  <section class="card gap-top">
+    <details open><summary>Telemetry input (editable)</summary>
+      <p class="muted">Columns: <code>timestamp, ambient_temp_c, humidity_pct, solar_irradiance_wm2</code>. Blank or invalid cells are cleaned automatically.</p>
+      <div class="row-actions"><button id="btnAdd">+ Add row</button> <button id="btnClear">Clear</button></div>
+      <div class="tablewrap"><table id="input"><thead><tr><th>Timestamp</th><th>Temp °C</th><th>Humidity %</th><th>Solar W/m²</th><th></th></tr></thead><tbody></tbody></table></div>
+    </details>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# macOS
+.DS_Store
+
+# Generated outputs
+predictions.csv
+
+# Local configuration and generated files
+app-config.local.json
+predictions.csv
+*.log
