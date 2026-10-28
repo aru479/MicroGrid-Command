@@ -60,12 +60,12 @@ class FakeResp:
 
 
 def test_quickml_single_mode_is_used_and_labelled(monkeypatch, sample):
+    monkeypatch.setenv("USE_QUICKML", "true")
     monkeypatch.setenv("QUICKML_ENDPOINT_URL", "https://example.invalid/predict")
     monkeypatch.setenv("QUICKML_ENDPOINT_KEY", "k")
     monkeypatch.setenv("CATALYST_ORG", "o")
     monkeypatch.setenv("QUICKML_TOKEN", "t")
     seen = {}
-
     def fake_post(url, json=None, headers=None, timeout=None):
         seen["headers"], seen["body"] = headers, json
         return FakeResp({"predictions": [123.0]})
@@ -81,6 +81,7 @@ def test_quickml_single_mode_is_used_and_labelled(monkeypatch, sample):
 
 
 def test_quickml_batch_mode(monkeypatch, sample):
+    monkeypatch.setenv("USE_QUICKML", "true")
     monkeypatch.setenv("QUICKML_ENDPOINT_URL", "https://example.invalid/predict")
     monkeypatch.setenv("QUICKML_PAYLOAD_MODE", "batch_data")
     monkeypatch.setattr(P.requests, "post", lambda *a, **k: FakeResp({"result": [1.0, 2.0, 3.0]}))
@@ -89,6 +90,7 @@ def test_quickml_batch_mode(monkeypatch, sample):
 
 
 def test_quickml_failure_falls_back_with_reason(monkeypatch, sample):
+    monkeypatch.setenv("USE_QUICKML", "true")
     monkeypatch.setenv("QUICKML_ENDPOINT_URL", "https://example.invalid/predict")
 
     def boom(*a, **k):

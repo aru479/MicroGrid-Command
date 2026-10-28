@@ -27,8 +27,11 @@ def index():
 
 @app.get("/api/health")
 def health():
-    return jsonify(ok=True, quickml_configured=P.quickml_configured(),
-                   model_in_use="quickml" if P.quickml_configured() else "local-fallback")
+    return jsonify(
+    ok=True,
+    quickml_configured=P.quickml_configured(),
+    model_in_use="quickml" if P.quickml_configured() else "local-fallback",
+)
 
 
 @app.get("/api/sample")

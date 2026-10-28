@@ -61,7 +61,7 @@ def dispatch(timestamps, demands, battery: Optional[Battery] = None) -> list:
             "grid_mode": mode,
             "overload_alert": is_overload(d),
             "battery_kw": round(battery_kw, 1),
-            "grid_kw": round(max(0.0, d - max(battery_kw, 0.0)), 1),
+            "grid_kw": round(max(0.0, d - battery_kw), 1),
             "soc_pct": round(soc, 1),
             "battery_depleted": bool(depleted),
         })

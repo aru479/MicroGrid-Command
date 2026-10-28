@@ -50,6 +50,8 @@ def _env(name: str, default: str = "") -> str:
 
 
 def quickml_configured() -> bool:
+    if _env("USE_QUICKML", "false").lower() != "true":
+        return False
     url = _env("QUICKML_ENDPOINT_URL")
     return bool(url) and url != PLACEHOLDER
 
@@ -109,7 +111,7 @@ def compute_columns(df: pd.DataFrame) -> pd.DataFrame:
     out["cool_deg_eve"] = cool * eve
     out["temp_day"] = t * day
     out["hour"] = hour.astype(float)
-    out["day_of_week"] = d["timestamp"].dt.dayofweek.astype(float)
+    out["day_of_week"] = d["timestamp"].dt.day_of_week.astype(float)
     out["month"] = d["timestamp"].dt.month.astype(float)
     return out.reset_index(drop=True)
 
@@ -173,6 +175,9 @@ def _headers() -> dict:
         h["X-QUICKML-ENDPOINT-KEY"] = _env("QUICKML_ENDPOINT_KEY")
     if _env("CATALYST_ORG"):
         h["CATALYST-ORG"] = _env("CATALYST_ORG")
+
+    h["Environment"] = _env("QUICKML_ENVIRONMENT", "Development")
+
     return h
 
 

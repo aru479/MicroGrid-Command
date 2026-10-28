@@ -21,3 +21,19 @@ predictions.csv
 app-config.local.json
 predictions.csv
 *.log
+
+# Local Catalyst configuration
+.catalystrc
+
+# Generated deployment build
+build/
+
+# Local backup copies
+*.bak
+*.backup
+*.pre_solar.bak
+
+# Python cache and test artifacts
+__pycache__/
+.pytest_cache/
+.coverage
